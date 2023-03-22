@@ -17,3 +17,5 @@ public:
         return true;
     }
 };
+
+https://leetcode.com/problems/jump-game/description/
