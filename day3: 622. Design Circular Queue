@@ -1,0 +1,98 @@
+class MyCircularQueue {
+public:
+    struct ListNode{
+            int data;
+            ListNode* next;
+        };
+        ListNode* front=NULL;
+        ListNode*rear=new ListNode;
+    MyCircularQueue(int k) {
+        ListNode* temp,*temp1;
+        temp1=rear;
+        k--;
+        while(k--)
+        {
+            temp=new ListNode;
+            temp1->next=temp;
+            temp1=temp1->next;
+        }
+        temp1->next=rear;;
+    }
+    
+    bool enQueue(int value) {
+        if(rear->next==front)
+        {
+            return false;
+        }
+        if(front==NULL)
+        {
+            front=rear;
+            front->data=value;
+            return true;
+        }
+        rear->next->data=value;
+        rear=rear->next;
+        return true;
+    }
+    
+    bool deQueue() {
+        if(front==NULL)
+        {
+            return false;
+        }
+        if(front==rear)
+        {
+            front=NULL;
+            return true;
+        }
+        front=front->next;
+        return true;
+    }
+    
+    int Front() {
+        if(isEmpty())
+        {
+            return -1;
+        }
+        int x=front->data;
+        return x;
+    }
+    
+    int Rear() {
+        if(front==NULL)
+        {
+            return -1;
+        }
+        int x=rear->data;
+        return x;
+    }
+    
+    bool isEmpty() {
+        if(front==NULL)
+        {
+            return true;
+        }
+        return false;
+    }
+    
+    bool isFull() {
+        if(front==rear->next)
+        {
+            return true;
+        }
+        return false;
+    }
+};
+
+/**
+ * Your MyCircularQueue object will be instantiated and called as such:
+ * MyCircularQueue* obj = new MyCircularQueue(k);
+ * bool param_1 = obj->enQueue(value);
+ * bool param_2 = obj->deQueue();
+ * int param_3 = obj->Front();
+ * int param_4 = obj->Rear();
+ * bool param_5 = obj->isEmpty();
+ * bool param_6 = obj->isFull();
+ */
+ 
+ //https://leetcode.com/problems/design-circular-queue/
