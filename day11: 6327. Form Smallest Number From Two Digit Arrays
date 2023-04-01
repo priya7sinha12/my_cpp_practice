@@ -1,0 +1,33 @@
+https://leetcode.com/contest/biweekly-contest-101/problems/form-smallest-number-from-two-digit-arrays/
+class Solution {
+public:
+    int minNumber(vector<int>& nums1, vector<int>& nums2) {
+        sort(nums1.begin(),nums1.end());
+        sort(nums2.begin(),nums2.end());
+        int i=nums1.size(),j=nums2.size();
+        int x=0,y=0;
+        while(x<i&&y<j)
+        {
+            if(nums1[x]>nums2[y]){
+                y++;
+            }
+            else if(nums1[x]<nums2[y]){
+                x++;
+            }
+            else
+            {
+                return nums1[x];
+            }
+        }
+        x=nums1[0];
+        y=nums2[0];
+        if(x>y)
+        {
+            return (y*10)+x;
+        }
+        else
+        {
+            return (x*10)+y;
+        }
+    }
+};
