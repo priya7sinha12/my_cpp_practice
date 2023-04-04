@@ -1,0 +1,33 @@
+//https://practice.geeksforgeeks.org/problems/6a1b365b520f10c8a29b533eb72951b4b4237b57/1
+// User function Template for C++
+
+int minSteps(string str) {
+    // Write your code here.
+    int a=0,b=0;
+    bool x=0;
+    int n=str.size(),i=0;
+    while(i<n)
+    {
+        char ch=str[i];
+        if(x==0)
+        {
+            a++;
+            while(str[i]==ch&&i<n)
+            {
+                i++;
+            }
+            x=!x;
+        }
+        else
+        {
+            b++;
+            while(str[i]==ch&&i<n)
+            {
+                i++;
+            }
+            x=!x;
+        }
+        
+    }
+    return min(a,b)+1;
+}
