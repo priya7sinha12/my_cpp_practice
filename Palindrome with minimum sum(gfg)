@@ -1,0 +1,105 @@
+//{ Driver Code Starts
+// Initial Template for C++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+
+// } Driver Code Ends
+// User function Template for C++
+
+class Solution {
+  public:
+    char findNext(string st){
+        int i=0,j=st.length()-1;;
+        while(i<=j){
+            if(st[i]!='?'){
+                return st[i];
+            }
+            if(st[j]!='?'){
+                return st[j];
+            }
+            i++;
+            j--;
+        }
+        return '#';
+    }
+    int minimumSum(string s) {
+        // code here
+        int i=0,j=s.length()-1;
+        int sum=0;
+        char prev='#';
+        while(i<=j){
+            //cout<<"hi"<<endl;
+            if(prev=='#'){
+                if(s[i]=='?'&&s[j]=='?'){
+                    char temp=findNext(s);
+                    s[i]=temp;
+                    s[j]=temp;
+                    prev=s[i];
+                }
+                else if(s[i]=='?'){
+                    s[i]=s[j];
+                    prev=s[i];
+                }
+                else if(s[j]=='?'){
+                    s[j]=s[i];
+                    prev=s[i];
+                    
+                }
+                else if(s[i]==s[j]){
+                    prev=s[i];
+                }
+                else{
+                    return -1;
+                }
+            }
+            else{
+                if(s[i]=='?'&&s[j]=='?'){
+                    s[i]=prev;
+                    s[j]=prev;
+                }
+                else if(s[i]=='?'){
+                    s[i]=s[j];
+                    sum+=abs(int(prev-s[i]));
+                    prev=s[i];
+                }
+                else if(s[j]=='?'){
+                    s[j]=s[i];
+                    sum+=abs(int(prev-s[i]));
+                    prev=s[i];
+                    
+                }
+                else if(s[i]==s[j]){
+                    sum+=abs(int(prev-s[i]));
+                    prev=s[i];
+                }
+                else{
+                    return -1;
+                }
+            }
+            i++;
+            j--;
+        }
+        return 2*sum;
+    }
+};
+
+//{ Driver Code Starts.
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        string s;
+        cin >> s;
+
+        Solution ob;
+        int ans = ob.minimumSum(s);
+        cout << ans;
+        cout << "\n";
+    }
+    return 0;
+}
+
+// } Driver Code Ends
