@@ -1,0 +1,56 @@
+//User function Template for C++
+/*Structure of the node of the binary tree is as
+struct Node {
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int val) {
+        data = val;
+        left = right = NULL;
+    }
+};
+*/
+
+class Solution{
+    public:
+    //Function to store the zig zag order traversal of tree in a list.
+    vector <int> zigZagTraversal(Node* root)
+    {
+    	// Code here
+    	vector <int> ans;
+    	stack<Node *> currLevel;
+    	stack<Node *> nextLevel;
+    	currLevel.push(root);
+    	bool start=0;
+    	while(!nextLevel.empty()||!currLevel.empty()){
+	        if(start==0){
+	            int size=currLevel.size();
+	            while(size--){
+    	            Node * temp=currLevel.top();
+    	            currLevel.pop();
+    	            ans.push_back(temp->data);
+    	            if(temp->left)
+    	                nextLevel.push(temp->left);
+    	            if(temp->right)
+    	                nextLevel.push(temp->right);
+	            }
+	            start=!start;
+	        }
+	        else{
+	            int size=nextLevel.size();
+	            while(size--){
+    	            Node * temp=nextLevel.top();
+    	            nextLevel.pop();
+    	            ans.push_back(temp->data);
+    	            if(temp->right)
+    	                currLevel.push(temp->right);
+    	            if(temp->left)
+    	                currLevel.push(temp->left);
+	            }
+	            start=!start;
+	        }
+    	}
+    	return ans;
+    }
+};
